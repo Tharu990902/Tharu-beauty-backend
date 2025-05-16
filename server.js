@@ -1,0 +1,38 @@
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import cors from 'cors';   
+
+dotenv.config();
+const app = express();
+const mongoUrl = process.env.MONGO_URL
+
+app.use(cors());
+
+mongoose.connect(mongoUrl, {})
+const connection = mongoose.connection;
+connection.once("open", () => {
+    console.log('MongoDB database connection established successfully');
+});
+
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+
+    const token = req.header("Authorization")?.replace("Bearer ", "");
+    if (token != null) {
+    jwt.verify(token, process.env.SECTER_KEY, (err,decoded) => {
+        if (!err) {
+            req.user = decoded
+        }
+    });
+    
+    }
+    next();
+});
+
+app.listen(5000, () => {
+    console.log(`Server is running on PORT 5000`);
+});
