@@ -4,12 +4,16 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import cors from 'cors';   
+import { notFound, errorHandler } from './middleware/Errorhandling.js';
 
 dotenv.config();
 const app = express();
 const mongoUrl = process.env.MONGO_URL
 
 app.use(cors());
+
+app.use(errorHandler);
+app.use(notFound);
 
 mongoose.connect(mongoUrl, {})
 const connection = mongoose.connection;
