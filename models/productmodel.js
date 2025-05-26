@@ -36,7 +36,37 @@ const ProductSchema = mongoose.Schema({
     },
     description:{
         type: String
-    }
+    },
+    category: {
+       type: Array
+    },
+    brand: {
+        type: String,
+        
+    },
+    skintype: {
+        type: Array,  
+    },
+    instock: {
+        type: Boolean,
+        default: true
+    },
+    rating:[
+        {
+            star: {
+                type: Number,
+            },
+            name: {
+                type: String,
+            },
+            comment: {
+                type: String,
+            },
+            postedby: {
+                type: String,
+            },
+        }
+    ]
 });
 
 
