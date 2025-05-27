@@ -49,7 +49,19 @@ const userSchema = new mongoose.Schema({
 
 })
 
+// Hash password before saving to database
+userSchema.pre("save", async function (next) {
+    if (this.isModified("password")) {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
+    next();
+});
 
+// match password method
+
+userSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
 
 const User = mongoose.model("Users", userSchema);
 export default User;

@@ -1,5 +1,5 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -21,8 +21,7 @@ connection.once("open", () => {
     console.log('MongoDB database connection established successfully');
 });
 
-app.use(bodyParser.json());
-
+app.use(cookieParser());
 app.use((req, res, next) => {
 
     const token = req.header("Authorization")?.replace("Bearer ", "");
