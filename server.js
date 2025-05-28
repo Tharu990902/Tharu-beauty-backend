@@ -1,7 +1,5 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import cors from 'cors';   
 import { notFound, errorHandler } from './middleware/Errorhandling.js';
@@ -10,34 +8,24 @@ import dbConnection from './util/db.js';
 
 dotenv.config();
 const app = express();
-const mongoUrl = process.env.MONGO_URL
 
+// CORS configuration
 app.use(cors());
 
+// Middleware
 app.use(errorHandler);
 app.use(notFound);
 
-mongoose.connect(mongoUrl, {})
-const connection = mongoose.connection;
-connection.once("open", () => {
-    console.log('MongoDB database connection established successfully');
-});
-
+// Cookie parser middleware
 app.use(cookieParser());
-app.use((req, res, next) => {
 
-    const token = req.header("Authorization")?.replace("Bearer ", "");
-    if (token != null) {
-    jwt.verify(token, process.env.SECTER_KEY, (err,decoded) => {
-        if (!err) {
-            req.user = decoded
-        }
-    });
-    
-    }
-    next();
-});
+// Routes
+app.use("/api/auth", authRoutes);
+
+app.use(express.json());
+
 
 app.listen(5000, () => {
     console.log(`Server is running on PORT 5000`);
+    dbConnection(); // Connect to MongoDB
 });
