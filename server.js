@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import cors from 'cors';   
 import { notFound, errorHandler } from './middleware/Errorhandling.js';
+import authRoutes from './routes/auth.route.js';
+import dbConnection from './util/db.js';
 
 dotenv.config();
 const app = express();
