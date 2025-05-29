@@ -22,16 +22,16 @@ const userSchema = new mongoose.Schema({
     },
     phone:{
         type: String,
-        required: true
+        
     },
     address:{
         type: String,
-        required: true
+        
     },
     type:{
         type: String,
         default: "customer",
-        required: true
+        
     },
     status:{
         type: Number,
