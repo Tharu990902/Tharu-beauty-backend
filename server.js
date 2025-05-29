@@ -7,6 +7,7 @@ import authRoutes from './routes/auth.route.js';
 import dbConnection from './util/db.js';
 import productRoutes from './routes/product.route.js';
 import bannerRoutes from './routes/banner.route.js';
+import userRoute from './routes/user.route.js';
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/banner", bannerRoutes);
+app.use("/api/user", userRoute);
 
 
 

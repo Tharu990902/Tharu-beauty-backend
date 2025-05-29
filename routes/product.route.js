@@ -4,13 +4,13 @@ import express from "express";
 const router = express.Router();
 
 // Create a new product
-router.post("/create", createProduct);
+router.post("/", createProduct);
 // Get all products
 router.get("/", getAllProducts);
 // Get a product by ID
 router.get("/:id", getProduct);
 // Delete a product by ID
-router.delete("/delete/:id", deleteProduct);
+router.delete("/:id", deleteProduct);
 // Rate a product
 router.put("/rate/:id", rateProduct);
 // Update a product by ID
