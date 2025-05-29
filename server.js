@@ -6,6 +6,7 @@ import { notFound, errorHandler } from './middleware/Errorhandling.js';
 import authRoutes from './routes/auth.route.js';
 import dbConnection from './util/db.js';
 import productRoutes from './routes/product.route.js';
+import bannerRoutes from './routes/banner.route.js';
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/product", productRoutes);
+app.use("/api/banner", bannerRoutes);
 
 
 
