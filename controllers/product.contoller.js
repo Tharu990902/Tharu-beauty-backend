@@ -1,4 +1,4 @@
-import Product from '../models/product.model.js';
+import Product from '../models/productmodel.js';
 import asyncHandler from 'express-async-handler';
 
 

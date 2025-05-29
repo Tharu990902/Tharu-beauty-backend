@@ -1,4 +1,4 @@
-import Banner from '../models/banner.model.js';
+import Banner from '../models/bannermodel.js';
 import asyncHandler from 'express-async-handler';
 
 

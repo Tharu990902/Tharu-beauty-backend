@@ -41,7 +41,7 @@ const OrderSchema = new mongoose.Schema({
         
     },
     status: {
-        type: number,
+        type: Number,
         default: 0,
     },
     note: {
