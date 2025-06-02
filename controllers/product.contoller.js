@@ -101,6 +101,8 @@ export const getAllProducts = asyncHandler(async (req, res) => {
     const qcategory = req.query.category;
     const qsearch = req.query.search;
 
+    
+
     let products;
 
     if(qnew) {
@@ -123,6 +125,9 @@ export const getAllProducts = asyncHandler(async (req, res) => {
         });
     } else {
         products = await Product.find().sort({ createdAt: -1 });
+        res.status(200);
+        throw new Error("No products found");
+
     }
 })
 

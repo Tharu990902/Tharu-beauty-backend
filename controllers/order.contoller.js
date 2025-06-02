@@ -68,7 +68,7 @@ export const deleteOrder = asyncHandler(async (req, res) => {
 // Get all orders
 
 export const getAllOrders = asyncHandler(async (req, res) => {
-    const orders = await Order.find().reverse();
+    const orders = await Order.find();
 
     if (orders) {
         res.status(200).json({

@@ -9,9 +9,11 @@ import productRoutes from './routes/product.route.js';
 import bannerRoutes from './routes/banner.route.js';
 import userRoute from './routes/user.route.js';
 import orderRoutes from './routes/order.route.js';
+import bodyParser from 'body-parser';
 
 dotenv.config();
 const app = express();
+
 app.use(express.json());
 
 // CORS configuration
@@ -26,7 +28,6 @@ app.use("/api/product", productRoutes);
 app.use("/api/banner", bannerRoutes);
 app.use("/api/user", userRoute);
 app.use("/api/order", orderRoutes);
-
 
 
 
