@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
 
@@ -21,16 +22,16 @@ const userSchema = new mongoose.Schema({
     },
     phone:{
         type: String,
-        required: true
+        
     },
     address:{
         type: String,
-        required: true
+        
     },
     type:{
         type: String,
         default: "customer",
-        required: true
+        
     },
     status:{
         type: Number,
@@ -47,6 +48,19 @@ const userSchema = new mongoose.Schema({
     }
 
 })
+
+// Hash password before saving to database
+userSchema.pre("save", async function (next) {
+    if (this.isModified("password")) {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
+    next();
+});
+
+// match password method
+userSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
 
 const User = mongoose.model("Users", userSchema);
 export default User;
